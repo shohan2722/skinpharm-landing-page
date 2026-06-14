@@ -18,12 +18,10 @@
       "mq6tbizv-imgi_27_9c923fdd-c778-414b-a583-e82e6dc74d77.png",
       "mq6tbj66-imgi_31_707048805_18554929576064542_4900855639629667169_n.jpg",
       "mq6tbj70-imgi_43_703708381_18553133080064542_5145337590300934164_n.jpg",
-      "mq6tbw08-Skin-Pharm---Sales-Page-Copy---2026-06-06T16_16_58.685_06_00.txt",
-      "skin-pharm-landing.html"
+      "mq6tbw08-Skin-Pharm---Sales-Page-Copy---2026-06-06T16_16_58.685_06_00.txt"
     ],
     "html": [
-      "index.html",
-      "skin-pharm-landing.html"
+      "index.html"
     ],
     "css": [],
     "scriptsAndComponents": [],
@@ -47,18 +45,13 @@
   "screens": [
     {
       "file": "index.html",
-      "role": "launcher-overview",
-      "implementationNote": "Use this as the navigation/overview entry only; implement each linked screen file as its own route/surface."
-    },
-    {
-      "file": "skin-pharm-landing.html",
       "role": "landing-page",
       "implementationNote": "Preserve visual hierarchy, responsive behavior, and interactive states from this screen."
     }
   ],
   "screenFilePolicy": {
     "mode": "screen-file-first",
-    "entryFileRole": "launcher-overview",
+    "entryFileRole": "landing-page",
     "rules": [
       "Each distinct user-facing screen or surface must be delivered and implemented as its own file/route.",
       "If a landing page is present or requested, keep it in landing.html and do not merge it into the product app screen.",

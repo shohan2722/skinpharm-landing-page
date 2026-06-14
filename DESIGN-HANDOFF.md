@@ -11,7 +11,7 @@ This archive is the source of truth for turning the design into production code.
 
 ## Source map
 - Primary entry: `index.html`
-- HTML screens detected: 2
+- HTML screens detected: 1
 - Stylesheets detected: 0
 - Script/component files detected: 0
 - Supporting assets detected: 14
@@ -64,7 +64,6 @@ For responsive web exports, treat these as a modern breakpoint system for one ad
 
 ## Entry points
 - `index.html`
-- `skin-pharm-landing.html`
 
 ## Styles
 - None detected
