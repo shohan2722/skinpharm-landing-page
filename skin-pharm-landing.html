@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skin Pharm — The Skin Health Blueprint™ Starter Kit</title>
+<style>
+:root{
+  --bg:#f7f4ec; --surface:#fffdf8; --surface-2:#efe9dc;
+  --fg:#2b2a26; --fg-2:#46443d; --muted:#7c786d; --meta:#a39e90;
+  --border:#e4ddcd; --border-soft:#efe9db;
+  --accent:#7c8765; --accent-deep:#646e51; --accent-soft:#e9ece0; --accent-on:#ffffff; --success:#5f7a4f;
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --container:1180px; --radius-sm:8px; --radius-md:14px; --radius-lg:22px;
+  --shadow:0 18px 48px -22px rgba(70,68,61,.32); --shadow-soft:0 8px 28px -16px rgba(70,68,61,.30);
+  --ease:cubic-bezier(.2,0,0,1);
+}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:var(--container);margin:0 auto;padding:0 clamp(20px,5vw,40px)}
+h1,h2,h3{font-family:var(--font-display);font-weight:500;line-height:1.1;letter-spacing:-.01em}
+h1{font-size:clamp(38px,6.4vw,72px)} h2{font-size:clamp(30px,4.6vw,52px)} h3{font-size:clamp(22px,2.6vw,30px)}
+.eyebrow{font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-deep)}
+.lead{font-size:clamp(18px,2vw,21px);color:var(--fg-2);max-width:62ch}
+p{text-wrap:pretty}.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:.55em;font-family:var(--font-body);font-size:16px;font-weight:600;padding:15px 30px;border-radius:999px;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),background .2s var(--ease),box-shadow .2s var(--ease);white-space:nowrap}
+.btn-primary{background:var(--accent);color:var(--accent-on);box-shadow:0 10px 24px -12px var(--accent)}
+.btn-primary:hover{background:var(--accent-deep);transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
+.btn-ghost{background:transparent;color:var(--fg);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent-deep)}
+.btn-ghost:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent-deep);outline-offset:2px}
+.btn-lg{padding:18px 38px;font-size:17px}
+.btn .arr{transition:transform .2s var(--ease)}.btn:hover .arr{transform:translateX(3px)}
+.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:78px;gap:24px}
+.brand img{height:26px;width:auto}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:14.5px;font-weight:500;color:var(--fg-2);transition:color .18s}
+.nav-links a:hover{color:var(--accent-deep)}
+.nav-cta{display:flex;align-items:center;gap:14px}
+section{padding:clamp(64px,9vw,118px) 0}
+.section-tight{padding:clamp(48px,6vw,80px) 0}
+.center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
+.stack>*+*{margin-top:22px}
+.media{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);background:var(--surface-2)}
+.media img{width:100%;height:100%;object-fit:cover;object-position:center center}
+.results-media{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:42px}
+.results-media .media{aspect-ratio:2/3}
+.results-media .media img{object-position:center 15%}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent-deep);background:var(--accent-soft);padding:7px 14px;border-radius:999px}
+.hero{padding-top:clamp(48px,6vw,84px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,72px);align-items:center}
+.hero-copy .eyebrow{margin-bottom:18px;display:inline-block}
+.hero h1{margin-bottom:22px}.hero .lead{margin-bottom:30px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.hero-trust{display:flex;flex-wrap:wrap;gap:22px;margin-top:34px;padding-top:28px;border-top:1px solid var(--border)}
+.trust-item{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:var(--fg-2)}
+.trust-item svg{flex:none}
+.hero-media-wrap{position:relative}
+.hero-media{aspect-ratio:4/5;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.hero-media img{width:100%;height:100%;object-fit:cover}
+.hero-inset{position:absolute;left:-34px;bottom:-30px;width:42%;aspect-ratio:3/4;border-radius:var(--radius-md);overflow:hidden;border:6px solid var(--surface);box-shadow:var(--shadow)}
+.hero-inset img{width:100%;height:100%;object-fit:cover}
+.guarantee-chip{position:absolute;top:18px;right:18px;background:var(--surface);border-radius:999px;padding:10px 16px 10px 12px;display:flex;align-items:center;gap:9px;box-shadow:var(--shadow-soft);font-size:13px;font-weight:600}
+.guarantee-chip .dot{width:34px;height:34px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent-deep);font-family:var(--font-display);font-size:15px;font-weight:600}
+.hook{background:var(--accent-deep);color:#f4f3ec}
+.hook .container{display:grid;grid-template-columns:1fr 1.25fr;gap:clamp(32px,5vw,64px);align-items:center}
+.hook .media{box-shadow:none;border-radius:var(--radius-md)}.hook .media img{aspect-ratio:4/5}
+.hook h2{color:#fbfaf4;margin-bottom:22px}.hook p{color:#e2e3d6;font-size:18px}
+.hook .stack>*+*{margin-top:18px}.hook strong{color:#fff}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,72px);align-items:center}
+.split.rev .col-media{order:-1}
+.problem-list{list-style:none;margin-top:26px}
+.problem-list li{padding:14px 0;border-bottom:1px solid var(--border);color:var(--fg-2)}
+.problem-list li:first-child{padding-top:0}.problem-list li:last-child{border-bottom:none}
+.media-pair{display:grid;grid-template-columns:1.3fr .9fr;gap:16px;align-items:stretch}
+.media-pair .media:nth-child(1){aspect-ratio:3/4}
+.media-pair .media:nth-child(2){aspect-ratio:3/4;align-self:center}
+.solution{background:var(--surface)}.solution .lead{margin-bottom:26px}
+.sol-bullets{list-style:none;margin:8px 0 0}
+.sol-bullets li{display:flex;gap:14px;padding:12px 0;align-items:flex-start;color:var(--fg-2)}
+.sol-bullets .x{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent-soft);display:grid;place-items:center;color:var(--accent-deep);margin-top:2px}
+.sol-bullets .x svg{width:14px;height:14px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:54px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.step:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft)}
+.step .media{border-radius:0;box-shadow:none;aspect-ratio:4/3}
+.step-body{padding:26px 26px 30px}
+.step-num{font-family:var(--font-display);font-size:15px;color:var(--accent-deep);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.step h3{margin:8px 0 12px}.step p{font-size:15.5px;color:var(--muted)}
+.testi{background:var(--surface-2)}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:50px}
+.quote{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:30px;display:flex;flex-direction:column;gap:18px}
+.quote .stars{color:var(--accent);font-size:15px;letter-spacing:3px}
+.quote blockquote{font-family:var(--font-display);font-size:21px;line-height:1.4;color:var(--fg)}
+.quote .who{font-size:13.5px;color:var(--muted);margin-top:auto}
+.quote .who b{color:var(--fg);font-family:var(--font-body);font-weight:600;display:block;font-size:14.5px}
+.results-media{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+.results-media .media{aspect-ratio:4/5}
+.results-media .media img{object-position:center top}
+.bna-cap{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;margin-top:12px}
+.proof-bar{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:46px}
+.proof-bar span{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:11px 20px;font-size:13.5px;font-weight:600;color:var(--fg-2);display:flex;gap:9px;align-items:center}
+.proof-bar span .b{color:var(--accent-deep)}
+.included .split{align-items:start}
+.inc-list{list-style:none;counter-reset:inc;margin-top:8px}
+.inc-list li{display:flex;gap:18px;padding:22px 0;border-bottom:1px solid var(--border)}
+.inc-list li:last-child{border-bottom:none}
+.inc-list .n{counter-increment:inc;flex:none;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-size:19px}
+.inc-list .n::before{content:counter(inc)}
+.inc-list h3{font-size:20px;margin-bottom:5px}
+.inc-list h3 .role{font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep);display:block;margin-bottom:6px}
+.inc-list p{font-size:15px;color:var(--muted)}
+.value-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:34px;box-shadow:var(--shadow-soft);position:sticky;top:100px}
+.value-card .media{aspect-ratio:4/3;margin-bottom:24px;box-shadow:none}
+.value-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px dashed var(--border)}
+.value-row.total{border-bottom:none;padding-top:18px}
+.value-row .lbl{color:var(--muted);font-size:15px}.value-row .v{font-weight:600}
+.value-row .v.strike{color:var(--meta);text-decoration:line-through;font-weight:400}
+.price-now{font-family:var(--font-display);font-size:40px;color:var(--accent-deep)}
+.value-card .btn{width:100%;justify-content:center;margin-top:20px}
+.value-note{font-size:12.5px;color:var(--muted);text-align:center;margin-top:14px}
+.bonus{background:var(--accent-soft);border-radius:var(--radius-md);padding:16px 18px;margin-top:20px;font-size:14px;color:var(--accent-deep)}
+.founder{background:var(--accent-deep);color:#f3f2ea}.founder .split{align-items:center}
+.founder h2{color:#fbfaf4;margin-bottom:24px}.founder p{color:#e2e3d6;margin-bottom:16px}
+.founder .eyebrow{color:#c8cfb4}
+.founder-media{position:relative}.founder-media .media{aspect-ratio:4/5;box-shadow:none}
+.founder-inset{display:none}
+.founder-inset img{width:100%;height:100%;object-fit:cover}
+.sig{font-family:var(--font-display);font-style:italic;font-size:28px;color:#fff;margin-top:8px}
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,56px)}
+.fit-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:clamp(28px,3vw,42px)}
+.fit-block.no{background:var(--surface-2)}.fit-block h3{margin-bottom:8px}
+.fit-block .sub{color:var(--muted);font-size:14px;margin-bottom:22px}
+.fit-block ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+.fit-block li{display:flex;gap:13px;font-size:15.5px;color:var(--fg-2);line-height:1.55}
+.fit-block li .ic{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;margin-top:1px}
+.fit-block.yes li .ic{background:var(--accent-soft);color:var(--accent-deep)}
+.fit-block.no li .ic{background:#e9e3d6;color:var(--muted)}
+.fit-block li .ic svg{width:13px;height:13px}
+.fit-me-media{margin-top:40px}.fit-me-media .media{aspect-ratio:21/9;object-position:center 25%}
+.faq{background:var(--surface)}.faq .split{align-items:start}
+.faq-media .media{aspect-ratio:3/4;position:sticky;top:100px}
+.acc{border-top:1px solid var(--border)}.acc-item{border-bottom:1px solid var(--border)}
+.acc-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:22px 0;font-family:var(--font-display);font-size:20px;color:var(--fg);font-weight:500}
+.acc-q .pm{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--accent-deep);transition:transform .25s var(--ease),background .2s}
+.acc-item.open .acc-q .pm{transform:rotate(45deg);background:var(--accent-soft)}
+.acc-a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+.acc-a p{padding:0 0 24px;color:var(--muted);font-size:15.5px;max-width:60ch}
+.final-cta{position:relative;color:#fff;isolation:isolate;text-align:center;padding:clamp(90px,12vw,160px) 0}
+.final-cta .bg{position:absolute;inset:0;z-index:-2}
+.final-cta .bg img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.final-cta::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(50,53,40,.78),rgba(50,53,40,.62))}
+.final-cta h2{color:#fff;margin:18px auto;max-width:16ch}
+.final-cta .lead{color:#eef0e6;margin:0 auto 34px}.final-cta .eyebrow{color:#cdd4b9}
+.final-cta .alt{margin-top:18px;font-size:14px;color:#dfe2d3}
+.final-cta .alt a{text-decoration:underline;text-underline-offset:3px}
+.footer{background:#26261f;color:#cfccc0;padding:64px 0 40px}
+.footer-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:36px;padding-bottom:40px;border-bottom:1px solid #3a3a30}
+.footer .brand img{height:30px;filter:brightness(0) invert(1)}
+.footer-tag{max-width:36ch;font-size:14px;color:#a6a397;margin-top:16px}
+.footer-cols{display:flex;gap:64px;flex-wrap:wrap}
+.footer-col h4{font-family:var(--font-body);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#8c8a7e;margin-bottom:16px;font-weight:600}
+.footer-col a{display:block;font-size:14.5px;color:#cfccc0;padding:5px 0;transition:color .15s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;padding-top:28px;font-size:12.5px;color:#86847a}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:none;transform:translateY(120%);transition:transform .3s var(--ease)}
+.sticky-cta.show{transform:translateY(0)}.sticky-cta .btn{width:100%;justify-content:center}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+@media (max-width:1023px){
+  .nav-links{display:none}
+  .hero-grid{grid-template-columns:1fr;gap:42px}
+  .hero-inset{width:34%;left:auto;right:14px;bottom:-22px}
+  .hook .container,.split{grid-template-columns:1fr;gap:34px}
+  .split.rev .col-media{order:0}
+  .steps{grid-template-columns:1fr;gap:18px}
+  .proof-grid{grid-template-columns:1fr;gap:16px}
+  .included .split{grid-template-columns:1fr}
+  .value-card{position:static}
+  .founder-media{margin-bottom:34px}
+  .fit{grid-template-columns:1fr}
+  .faq .split{grid-template-columns:1fr}.faq-media{display:none}
+}
+@media (max-width:1023px){
+    .fit-me-media .media img{object-position:center 35%}
+}
+@media (max-width:639px){
+    body{font-size:16px;padding-bottom:80px}.nav-inner{height:66px}.brand img{height:22px}
+    .nav .btn{padding:11px 18px;font-size:14px}
+    .hero-cta .btn{width:100%;justify-content:center}.hero-trust{gap:14px}
+    .results-media{grid-template-columns:1fr}
+    .media-pair{grid-template-columns:1fr}.media-pair .media:nth-child(2){display:none}
+    .sticky-cta{display:flex;align-items:center}.value-card .price-now{font-size:34px}
+    .proof-bar span{font-size:12.5px;padding:9px 14px}
+     .fit-me-media .media img{object-position:center 35%}
+  }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Skin Pharm home"><img src="mq6tbio1-logo.svg" alt="Skin Pharm"></a>
+    <nav class="nav-links">
+      <a href="#problem">The Problem</a><a href="#solution">The Kit</a><a href="#steps">How It Works</a><a href="#proof">Results</a><a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta"><a href="#kit" class="btn btn-primary">Book Now</a></div>
+  </div>
+</header>
+<main id="top">
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">The Skin Health Blueprint™ Starter Kit</span>
+      <h1>A skincare routine clinically formulated for <em>your</em> skin.</h1>
+      <p class="lead">Finally — visible, natural-looking results without the guesswork. Introducing the first at-home regimen that translates our clinic's personalized, results-first philosophy directly to your bathroom shelf. The right ingredients, in the right order, with the guidance you've been missing.</p>
+      <div class="hero-cta">
+        <a href="#kit" class="btn btn-primary btn-lg">Get My Personalized Starter Kit <span class="arr">→</span></a>
+        <a href="#steps" class="btn btn-ghost btn-lg">See How It Works</a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#646e51" stroke-width="2"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4L3.2 7.7l5.4-.8z" stroke-linejoin="round"></path></svg> Formulated by a licensed NP</span>
+        <span class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#646e51" stroke-width="2"><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="12" r="9"></circle></svg> 30-day money-back guarantee</span>
+        <span class="trust-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#646e51" stroke-width="2"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"></path></svg> Backed by a real clinic</span>
+      </div>
+    </div>
+    <div class="hero-media-wrap reveal">
+      <div class="hero-media"><img src="mq6tbitj-imgi_20_718965009_18558039067064542_6530980357159346779_n.jpg" alt="Skin Pharm provider in clinic beside product shelves"></div>
+      <div class="guarantee-chip"><span class="dot">30</span> Day Guarantee</div>
+      <div class="hero-inset"><img src="mq6tbixa-imgi_25_716050452_18556552102064542_3381367016105119243_n.jpg" alt="Woman with healthy skin by window"></div>
+    </div>
+  </div>
+</section>
+<section class="hook section-tight">
+  <div class="container">
+    <div class="media reveal"><img src="mq6tbiud-imgi_22_716829486_18557313523064542_3973569649235243551_n.jpg" alt="Woman applying skincare"></div>
+    <div class="reveal stack">
+      <h2>You took our Skin Confidence Quiz — so we already know a few things about your skin.</h2>
+      <p>You want improvement you can actually see. You're wary of looking <strong>"done"</strong> or over-treated. And you're exhausted by the revolving door of creams, serums, and influencers telling you "this one changes everything."</p>
+      <p>Here's the truth: the difference between meh results and consistent, natural-looking progress isn't a miracle ingredient. It's having a regimen <strong>prescribed specifically for your skin profile</strong> — by someone who treats faces every day, not just sells bottles.</p>
+      <p>This starter kit is that regimen. It's not for everyone (more on that in a minute). But if your quiz results pointed you toward one of our core skin pathways, you're about to see what happens when your products stop guessing and start performing.</p>
+    </div>
+  </div>
+</section>
+<section id="problem">
+  <div class="container split">
+    <div class="reveal">
+      <span class="eyebrow">The Problem</span>
+      <h2 style="margin:16px 0 22px">You've probably spent more time researching products than a dermatologist spends in residency.</h2>
+      <p class="lead">You've stood in the aisle reading ingredient lists you can't pronounce. You've watched 20-minute videos comparing vitamin&nbsp;C serums. You've layered acids on top of moisturizers and crossed your fingers. And after all that effort… you look in the mirror and wonder, <em>"Is this actually doing anything?"</em></p>
+      <ul class="problem-list">
+        <li>Even worse — you've considered "a little something" (a bit of Botox, a peel, a laser session) but pulled back. You've seen the stiff forehead, the unnatural plumpness, the look that whispers <em>"I had work done."</em></li>
+        <li>It's not that you don't want results. You do. Deeply. You just want them to feel like <strong>you</strong>.</li>
+        <li>The frustration is real. The fear is valid. And the solution isn't more information overload — it's a system that removes the guessing game entirely.</li>
+      </ul>
+    </div>
+    <div class="col-media reveal">
+      <div class="media-pair">
+        <div class="media"><img src="mq6tbiud-imgi_22_716829486_18557313523064542_3973569649235243551_n.jpg" alt="Woman doing her skincare routine"></div>
+        <div class="media"><img src="mq6tbio1-imgi_1_Sets_nav_400x.png" alt="Skincare products"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="solution" class="solution">
+  <div class="container split rev">
+    <div class="col-media reveal">
+      <div class="media-pair">
+        <div class="media"><img src="mq6tbio1-imgi_1_Sets_nav_400x.png" alt="The Skin Health Blueprint Starter Kit products"></div>
+        <div class="media"><img src="mq6tbitj-imgi_20_718965009_18558039067064542_6530980357159346779_n.jpg" alt="Skin Pharm clinic"></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">The Solution</span>
+      <h2 style="margin:16px 0 22px">Meet The Skin Health Blueprint™ Starter Kit — your clinical-to-home regimen, personalized.</h2>
+      <p class="lead">Skin Pharm isn't just a skincare brand. It's a real clinical practice, founded and run by a Nurse Practitioner, where we've treated thousands of faces and learned that the best results come from continuity — an in-clinic plan supported by an intelligent at-home routine.</p>
+      <p class="muted" style="margin-top:18px">Based on your quiz profile, we've assembled the exact products your skin needs right now, in the precise order to apply them — so you don't have to figure out the sequence, compatibility, or frequency.</p>
+      <ul class="sol-bullets">
+        <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> No filler. No 12-step regimens that confuse you and irritate your skin.</li>
+        <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> No leftover products bought because an influencer swore by them — only to find they don't work for your concerns.</li>
+        <li><span class="x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> No risk of looking overdone. Every ingredient supports natural skin function — not because it's trendy.</li>
+      </ul>
+      <p style="margin-top:22px;font-family:var(--font-display);font-size:22px;color:var(--accent-deep);font-style:italic">Think of it as borrowing our provider's brain for your morning and evening routine — without the appointment.</p>
+    </div>
+  </div>
+</section>
+<section id="steps">
+  <div class="container">
+    <div class="center reveal">
+      <span class="eyebrow">How It Works</span>
+      <h2 style="margin:16px 0 18px">Your 3-step path to visible, natural improvement</h2>
+      <p class="lead">We've stripped away everything unnecessary. Here's how simple it becomes once you have your kit.</p>
+    </div>
+    <div class="steps">
+      <article class="step reveal">
+        <div class="media"><img src="mq6tbio1-imgi_1_Sets_nav_400x.png" alt="Personalized Skin Pharm starter kit"></div>
+        <div class="step-body"><span class="step-num">Step 01</span><h3>Receive your personalized kit</h3><p>Based on your skin profile — dullness, dark spots, fine lines, or texture — we send a 3–4 product regimen: cleanser, treatment, moisturizer, and (when indicated) SPF. Each is labeled clearly with when to use it (AM or PM) and order of application.</p></div>
+      </article>
+      <article class="step reveal">
+        <div class="media"><img src="mq6tbiok-imgi_2_skin_quiz_400x.png" alt="Simple morning and evening routine"></div>
+        <div class="step-body"><span class="step-num">Step 02</span><h3>Follow your 3-minute routine</h3><p>No stopwatch needed. Just a quick, intuitive sequence morning and evening. Most people tell us it feels less like a chore and more like a gentle daily reset.</p></div>
+      </article>
+      <article class="step reveal">
+        <div class="media"><img src="mq6tbiud-imgi_22_716829486_18557313523064542_3973569649235243551_n.jpg" alt="Woman with refreshed, healthy skin"></div>
+        <div class="step-body"><span class="step-num">Step 03</span><h3>Watch your skin change <span class="muted" style="font-size:14px;font-family:var(--font-body)">(in as little as 2 weeks)</span></h3><p>Within two weeks you'll notice texture smoothing. By week 4, friends may ask if you've been on vacation — because you'll have that rested, vibrant look that doesn't scream "I started a new product."</p></div>
+      </article>
+    </div>
+    <p class="center muted reveal" style="margin-top:34px;max-width:60ch;margin-left:auto;margin-right:auto">We'll also send a few check-in emails with tips, so you're never alone in the process. And if you ever want to explore in-clinic options, we can help bridge that too.</p>
+  </div>
+</section>
+<section id="proof" class="testi">
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow">Social Proof</span><h2 style="margin:16px 0 12px">Real people. Real results. Realistically pretty.</h2></div>
+    <div class="proof-grid">
+      <figure class="quote reveal"><div class="stars">★★★★★</div><blockquote>"I was terrified of looking frozen, so I avoided anything medical. But this kit gave me visible change without changing my face. My skin just looks healthier — my fine lines have softened, and I don't have that dull, tired look anymore."</blockquote><figcaption class="who"><b>Amanda R.</b> Dry / Sensitive Skin Profile</figcaption></figure>
+      <figure class="quote reveal"><div class="stars">★★★★★</div><blockquote>"I used to have a 7-step routine that fluctuated weekly. Now I have three products I actually trust because someone who sees skin professionally chose them for me. My dark spots have faded enough that I'm comfortable going out without foundation."</blockquote><figcaption class="who"><b>Jasmine T.</b> Combination / Uneven Tone Profile</figcaption></figure>
+      <figure class="quote reveal"><div class="stars">★★★★★</div><blockquote>"I started with this kit because I couldn't get to a clinic easily. When I finally visited for a consult, my provider said my skin was in the best shape it could be — and recommended I keep using most of the products. That validation was huge."</blockquote><figcaption class="who"><b>Carrie M.</b> Mature Skin Profile</figcaption></figure>
+    </div>
+    <div class="results-media reveal">
+      <div><div class="media"><img src="mq6tbizv-imgi_27_9c923fdd-c778-414b-a583-e82e6dc74d77.png" alt="Visible skin improvement results"></div><p class="bna-cap">Believable, gradual improvement</p></div>
+      <div><div class="media"><img src="mq6tbinn-imgi_45_701623736_18552550654064542_8195721860042063422_n.jpg" alt="Healthy, glowing complexion result"></div><p class="bna-cap">A fresh, healthy glow — that feels like you</p></div>
+    </div>
+    <div class="proof-bar reveal">
+      <span><span class="b">✓</span> Formulated by a licensed Nurse Practitioner</span>
+      <span><span class="b">✓</span> Backed by thousands of in-clinic patient insights</span>
+      <span><span class="b">★</span> Verified 4.9 / 5 average rating</span>
+    </div>
+  </div>
+</section>
+<section id="kit" class="included">
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow">What's Included</span><h2 style="margin:16px 0 18px">Here's exactly what's inside your starter kit</h2><p class="lead">Based on your assessment, your kit contains the precise formulations your skin needs. Here's what that looks like.</p></div>
+    <div class="split" style="margin-top:54px">
+      <div class="reveal">
+        <ul class="inc-list">
+          <li><span class="n"></span><div><h3><span class="role">The Prep Step</span>Gentle Cleanser</h3><p>Removes impurities without stripping your moisture barrier, so every treatment that follows absorbs fully and works harder. No tight, squeaky-clean feeling — just fresh, balanced skin.</p></div></li>
+          <li><span class="n"></span><div><h3><span class="role">The Core Corrective</span>Targeted Treatment</h3><p>Where your primary concern gets addressed. A vitamin-C brightener, multi-peptide line smoother, or gentle retinol alternative — a concentrated formula clinically proven to deliver visible change, without irritation.</p></div></li>
+          <li><span class="n"></span><div><h3><span class="role">The Moisture Seal</span>Barrier Moisturizer</h3><p>Locks in the corrective benefits and restores hydration so your skin functions at its best. Less mid-day tightness, and that smooth, plump bounce.</p></div></li>
+          <li><span class="n"></span><div><h3><span class="role">AM Protection (if included)</span>Broad-Spectrum SPF</h3><p>A lightweight SPF that wears like a moisturizer, so you never skip the single most important step in long-term skin health.</p></div></li>
+        </ul>
+        <p class="muted" style="margin-top:18px">Plus: a simple "How to Use" card with your morning and evening routine spelled out, and access to our customer care line whenever you have questions.</p>
+      </div>
+      <aside class="reveal">
+        <div class="value-card">
+          <div class="media"><img src="mq6tbinj-imgi_44_703907202_18552793852064542_3400278605376567780_n.jpg" alt="The complete Skin Pharm starter kit"></div>
+          <div class="value-row"><span class="lbl">Total Clinic Value</span><span class="v strike">$240</span></div>
+          <div class="value-row"><span class="lbl">"Natural Results" video series</span><span class="v strike">$49</span></div>
+          <div class="value-row total"><span class="lbl" style="font-size:16px;color:var(--fg);font-weight:600">Your Starter Kit Price</span><span class="price-now">$98</span></div>
+          <div class="value-note">or 3 interest-free payments of $33</div>
+          <div class="bonus"><b>Free bonus today:</b> Access to our "Natural Results" video series, where our NP founder shares pro tips for maintaining results — normally $49, yours free.</div>
+          <a href="#final" class="btn btn-primary btn-lg">I Want to Try the Kit Risk-Free</a>
+          <p class="value-note">No auto-subscription unless you choose it · 30-day money-back guarantee · Secure checkout</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+<section class="founder" id="founder">
+   <div class="container split">
+     <div class="founder-media reveal">
+       <div class="media"><img src="mqd8yefk-Maegan-SkinPharm-Founder.jpg" alt="Skin Pharm founder, Nurse Practitioner"></div>
+     </div>
+    <div class="reveal">
+      <span class="eyebrow">From The Founder</span>
+      <h2 style="margin:16px 0 24px">Why we built a skincare line — even though we're a clinic first.</h2>
+      <p>I'm a Nurse Practitioner, and I've spent over a decade in aesthetic medicine. I've seen too many patients doing too much at home and undoing the good we did in the clinic — or doing so little that their progress stalled between visits.</p>
+      <p>What I realized was simple: the at-home care landscape had failed these women. Too many choices. Too little oversight. Too many marketing promises that had nothing to do with real dermal science.</p>
+      <p>So we started making our own products — not because we wanted to be retailers, but because our patients deserved a bridge between appointments. Every formula went through the same filter: <em>would I put this on my own skin and recommend it to someone afraid of looking "done"?</em></p>
+      <p>I still treat patients weekly, and I still scrutinize every ingredient as if my face were the test case. I know you're skeptical — I would be too. That's exactly why we put a 30-day guarantee on this system.</p>
+      <p class="sig">— The Skin Pharm Founder, NP</p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="center reveal"><span class="eyebrow">Is This For Me?</span><h2 style="margin:16px auto 18px;max-width:18ch">Honest positioning — because trust beats hype.</h2></div>
+    <div class="fit" style="margin-top:48px">
+      <div class="fit-block yes reveal">
+        <h3>This starter kit is for you if…</h3>
+        <p class="sub">You're looking for believable, photographable progress.</p>
+        <ul>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> You've cycled through products that promised miracles but barely moved the needle — and want something that respects the biology of your skin.</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> You've been curious about clinical treatments but worried about looking unnatural. This builds a foundation that supports skin health first.</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> You're exhausted by 10-step social-media routines and just want someone you trust to say, "Here. Use these. In this order."</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> You want improvement without decoding ingredient lists or compatibility charts. We've done that research — clinically and practically.</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"></path></svg></span> You value transparency and real expertise over hype. Realistic, believable, visible — that's our bar.</li>
+        </ul>
+      </div>
+      <div class="fit-block no reveal">
+        <h3>Please don't buy this kit if…</h3>
+        <p class="sub">We'd rather be honest than oversell.</p>
+        <ul>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path></svg></span> You're looking for an overnight miracle. Skin change takes time and consistency — if you're not willing to give it at least 30 days, this isn't a fit.</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path></svg></span> You prefer to chase trends and switch products frequently. This system is built for stability and cumulative results.</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path></svg></span> You're already on a prescribed active-ingredient regimen (like tretinoin or strong acids). Consult your provider first — our kit may complement but never replace medical oversight.</li>
+          <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"></path></svg></span> You want dramatic results that look "done." Our entire brand is built on subtlety and gradual refinement. If you want an overhaul, we're not aligned.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fit-me-media reveal"><div class="media"><img src="mq6tbixa-imgi_25_716050452_18556552102064542_3381367016105119243_n.jpg" alt="Woman with natural, healthy-looking skin"></div></div>
+  </div>
+</section>
+<section id="faq" class="faq">
+  <div class="container split">
+    <div class="reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 style="margin:16px 0 8px">Questions (and the unabridged truth)</h2>
+      <div class="acc" style="margin-top:24px">
+        <div class="acc-item"><button class="acc-q">I'm not sure this will work for my specific skin type. <span class="pm">+</span></button><div class="acc-a"><p>Your kit was assembled based on your quiz profile, which maps to common patterns we see in our clinic. While no product can guarantee 100% perfection for every unique variable, the formulas are designed to be both effective and non-reactive across a wide range. And with the 30-day return option, the risk is minimal.</p></div></div>
+        <div class="acc-item"><button class="acc-q">Is this just more expensive department-store skincare? <span class="pm">+</span></button><div class="acc-a"><p>No. Our products are formulated at pharmaceutical-grade concentrations with stability and penetration in mind — the same level we'd use in a clinical setting. You're not paying for luxury packaging; you're paying for the formulation R&amp;D and ingredient sourcing that actually moves the needle.</p></div></div>
+        <div class="acc-item"><button class="acc-q">What if I want to combine this with Botox or other treatments later? <span class="pm">+</span></button><div class="acc-a"><p>Perfect. Many of our clinic patients start here and then layer in treatments once their skin is optimized. Your provider will actually thank you for being on a solid home routine — it enhances and prolongs their work.</p></div></div>
+        <div class="acc-item"><button class="acc-q">I'm on a budget. Can I just buy one product? <span class="pm">+</span></button><div class="acc-a"><p>We don't sell single products in this welcome kit because the system effect — using the right cleanser, corrector, and moisturizer together — is what creates the results. Splitting the regimen reduces efficacy significantly. If budget is a concern, we offer a 3-pay option.</p></div></div>
+        <div class="acc-item"><button class="acc-q">Do I need a prescription? <span class="pm">+</span></button><div class="acc-a"><p>No. All products are over-the-counter, though they are clinical-grade. They're safe for home use with typical over-the-counter actives.</p></div></div>
+        <div class="acc-item"><button class="acc-q">What happens if I react to something? <span class="pm">+</span></button><div class="acc-a"><p>Stop use immediately and reach out to our support team. We'll help troubleshoot and, if necessary, process a return. We take skin safety seriously.</p></div></div>
+      </div>
+    </div>
+    <div class="faq-media reveal"><div class="media"><img src="mq6tbixs-imgi_26_713584291_18556287451064542_5793770931129002678_n.jpg" alt="Premium Skin Pharm clinic interior"></div></div>
+  </div>
+</section>
+</main>
+<section id="final" class="final-cta">
+  <div class="bg"><img src="mq6tbitj-imgi_20_718965009_18558039067064542_6530980357159346779_n.jpg" alt=""></div>
+  <div class="container">
+    <span class="eyebrow reveal">Your Skin, On Your Terms</span>
+    <h2 class="reveal">Will you give your skin the advantage of a clinical-level routine — at home, with a 30-day safety net?</h2>
+    <p class="lead reveal">Start your personalized regimen, risk-free. No drama, no fine print.</p>
+    <div class="reveal"><a href="#kit" class="btn btn-primary btn-lg">Yes, I Want Visible, Natural Results — Order Now <span class="arr">→</span></a></div>
+    <p class="alt reveal">Prefer to start in person? <a href="#kit">Book a consultation</a> with our team.</p>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="#top"><img src="mq6tbio1-logo.svg" alt="Skin Pharm"></a>
+        <p class="footer-tag">Clinically formulated skincare and results-driven aesthetic care — designed by clinicians who know what real, believable results look like.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h4>The Kit</h4><a href="#solution">The Blueprint Starter Kit</a><a href="#kit">What's Included</a><a href="#steps">How It Works</a><a href="#proof">Results</a></div>
+        <div class="footer-col"><h4>Clinic</h4><a href="#solution">Our Practice</a><a href="#founder">Meet The Founder</a><a href="#faq">FAQ</a><a href="#kit">Book Now</a></div>
+        <div class="footer-col"><h4>Support</h4><a href="#faq">Guarantee</a><a href="#faq">Shipping &amp; Returns</a><a href="#faq">Contact Care Team</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 Skin Pharm. All rights reserved.</span><span>The Skin Health Blueprint™ · 30-Day Money-Back Guarantee</span></div>
+  </div>
+</footer>
+<div class="sticky-cta" id="stickyCta"><a href="#kit" class="btn btn-primary">Get My Starter Kit — Risk-Free</a></div>
+<script>
+document.querySelectorAll('.acc-q').forEach(function(btn){
+  btn.setAttribute('aria-expanded','false');
+  btn.addEventListener('click',function(){
+    var item=btn.closest('.acc-item');var ans=item.querySelector('.acc-a');var isOpen=item.classList.contains('open');
+    document.querySelectorAll('.acc-item.open').forEach(function(o){o.classList.remove('open');o.querySelector('.acc-q').setAttribute('aria-expanded','false');o.querySelector('.acc-a').style.maxHeight=null;});
+    if(!isOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');ans.style.maxHeight=ans.scrollHeight+'px';}
+  });
+});
+var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+var sticky=document.getElementById('stickyCta');
+window.addEventListener('scroll',function(){var pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);if(pct>0.2 && pct<0.92){sticky.classList.add('show');}else{sticky.classList.remove('show');}},{passive:true});
+</script>
+
+
+</body></html>
